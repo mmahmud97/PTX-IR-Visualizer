@@ -1,4 +1,4 @@
-# 💻 PTX IR Visualizer – Neo Matrix Edition
+# 💻 PTX IR Visualizer
 
 ## 🚀 Overview
 **PTX IR Visualizer** is a tool that helps **GPU developers** compare different versions of **PTX (Parallel Thread Execution)** code. It highlights the **changes, optimizations, or regressions** between two PTX files, providing both a **Command-Line Interface (CLI)** and a **Matrix-style Web GUI**.
@@ -31,7 +31,7 @@ This tool enables **CUDA developers** and **compiler engineers** to see **how th
 ## 🛠️ How to Use
 
 ### 1️⃣ Run the Web App
-```bash
+
 flask run --host=0.0.0.0 --port=8000
 
 Open your browser and go to:
