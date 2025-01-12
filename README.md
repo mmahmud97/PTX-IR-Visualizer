@@ -75,7 +75,7 @@ Changes in myKernel:
 
 ### Web GUI:
 
-A Matrix-style interface showing:
+An interface showing:
 
 🟢 Added lines in green.
 
