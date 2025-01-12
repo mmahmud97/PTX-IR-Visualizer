@@ -39,6 +39,10 @@ class TransformAnalyzer:
             instructions_a = ptx_a[kernel_name]["instructions"]
             instructions_b = ptx_b[kernel_name]["instructions"]
 
+            print(f"\nComparing kernel: {kernel_name}")
+            print("Instructions A:", instructions_a)
+            print("Instructions B:", instructions_b)
+
             if len(instructions_a) != len(instructions_b) or any(
                 ins_a != ins_b for ins_a, ins_b in zip(instructions_a, instructions_b)
             ):
@@ -48,6 +52,7 @@ class TransformAnalyzer:
                 }
 
         return report
+
 
 
 
