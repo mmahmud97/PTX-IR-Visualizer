@@ -4,8 +4,6 @@
 # -------------------------------------------------------------------------------------
 
 import argparse
-import os
-
 from ptx_parser import PtxParser
 from transform_analyzer import TransformAnalyzer
 from visualizer import Visualizer
@@ -19,7 +17,7 @@ def main():
         print("Please provide at least two PTX files to compare.")
         return
 
-    # Parse the first and second PTX for demonstration
+    # Parse the first and second PTX for comparison
     with open(args.ptx_files[0], 'r') as f:
         ptx_text_a = f.read()
 
@@ -35,13 +33,18 @@ def main():
     analyzer = TransformAnalyzer()
     diff_report = analyzer.compare_kernels(data_a, data_b)
 
-    visual = Visualizer()
-    text_output = visual.text_report(diff_report)
-    print(text_output)
+    # Print the diff report
+    if diff_report["changed_kernels"]:
+        for kernel, changes in diff_report["changed_kernels"].items():
+            print(f"\nChanges in {kernel}:")
+            print(changes["instruction_diff"])
+    else:
+        print("\nNo differences found.")
 
     # Optionally, render a graph for a kernel that appears in both
     common_kernels = set(data_a.keys()).intersection(set(data_b.keys()))
     if common_kernels:
+        visual = Visualizer()
         kernel = list(common_kernels)[0]
         graph_a = visual.create_instruction_graph(data_a, kernel)
         visual.render_graph(graph_a, output_file=f"{kernel}_graph_A.png")
@@ -51,4 +54,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -15,7 +15,7 @@ class TransformAnalyzer:
     """
 
     def compare_kernels(self, ptx_a: Dict[str, Any], ptx_b: Dict[str, Any]) -> Dict[str, Any]:
-        """
+        """git 
         Compares kernel data from two PTX sets.
         Returns:
             dict: A report highlighting changes in instruction count, new/removed kernels, etc.
