@@ -38,11 +38,11 @@ Open your browser and go to:
 
 http://127.0.0.1:8000
 
-2️⃣ Run the CLI Tool
+### 2️⃣ Run the CLI Tool
 
 python run_visualizer.py --ptx_files sample_ptx/version_a.ptx sample_ptx/version_b.ptx
 
-🧪 Test Inputs
+### 🧪 Test Inputs
 
 Use the following sample inputs to test the tool:
 
@@ -60,7 +60,7 @@ PTX Version B:
     ld.global.u32 %r3, [%rd1];
 }
 
-📊 Expected Output
+### 📊 Expected Output
 
 Command Line:
 
@@ -73,7 +73,7 @@ Changes in myKernel:
 -ld.param.u32 %r3, [_Z6param_0]
 +ld.global.u32 %r3, [%rd1]
 
-Web GUI:
+### Web GUI:
 
 A Matrix-style interface showing:
 
@@ -82,15 +82,3 @@ A Matrix-style interface showing:
 🔴 Removed lines in red.
 
 ⚪ Unchanged lines in grey.
-
-🖥️ Project Structure
-'''bash
-ptx-ir-visualizer/
-├── run_visualizer.py         # CLI Tool
-├── web_app.py                # Web App (Flask)
-├── ptx_parser.py             # PTX Parsing Logic
-├── transform_analyzer.py     # Diff Comparison Logic
-├── visualizer.py             # Graphical/Text Diff Generator
-├── sample_ptx/               # Sample PTX Files
-├── templates/                # HTML Templates for Web GUI
-└── static/                   # CSS/JS for Web GUI
