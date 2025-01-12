@@ -84,7 +84,7 @@ A Matrix-style interface showing:
 ⚪ Unchanged lines in grey.
 
 🖥️ Project Structure
-
+'''bash
 ptx-ir-visualizer/
 ├── run_visualizer.py         # CLI Tool
 ├── web_app.py                # Web App (Flask)
