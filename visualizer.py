@@ -6,6 +6,7 @@
 import networkx as nx
 from typing import Dict, Any
 
+
 class Visualizer:
     """
     Visualizer constructs a graph from the PTX instructions (optionally) and helps present
@@ -36,7 +37,6 @@ class Visualizer:
         """
         Renders the given networkx graph as an image file (e.g., PNG).
         """
-        import pygraphviz
         from networkx.drawing.nx_agraph import to_agraph
 
         A = to_agraph(graph)
@@ -59,4 +59,3 @@ class Visualizer:
             lines.append("")
 
         return "\n".join(lines)
-
