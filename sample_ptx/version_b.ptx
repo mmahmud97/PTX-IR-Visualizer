@@ -1,1 +1,4 @@
-.visible .entry myKernel() { mov.b32 %r1, %r2; ld.global.u32 %r3, [%rd1]; }
+.visible .entry myKernel() {
+    mov.b32 %r1, %r2;
+    ld.global.u32 %r3, [%rd1];
+}

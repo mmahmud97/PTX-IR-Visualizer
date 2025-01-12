@@ -23,7 +23,7 @@ class Visualizer:
 
         # Add nodes
         for idx, ins in enumerate(instructions):
-            node_label = f"{idx}: {ins['opcode']}.{ins['modifier']} {ins['operands']}"
+            node_label = f"{idx}: {ins['opcode']} {ins['operands']}"
             G.add_node(idx, label=node_label)
 
         # Create edges as a simple chain

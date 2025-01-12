@@ -60,9 +60,10 @@ class TransformAnalyzer:
         """
         Generates a textual diff of instructions between two lists.
         """
-        # Convert instruction dicts to strings for easier diff
-        lines_a = [f"{ins['opcode']} {ins['modifier']} {ins['operands']}" for ins in instructions_a]
-        lines_b = [f"{ins['opcode']} {ins['modifier']} {ins['operands']}" for ins in instructions_b]
+
+        lines_a = [f"{ins['opcode']} {ins['operands']}" for ins in instructions_a]
+        lines_b = [f"{ins['opcode']} {ins['operands']}" for ins in instructions_b]
+
 
         diff = difflib.unified_diff(lines_a, lines_b, lineterm="", fromfile="PTX_A", tofile="PTX_B")
         return "\n".join(diff)

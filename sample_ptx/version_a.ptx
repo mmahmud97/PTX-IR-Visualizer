@@ -1,1 +1,4 @@
-.visible .entry myKernel() { mov.b32 %r1, %r2; ld.param.u32 %r3, [_Z6param_0]; }
+.visible .entry myKernel() {
+    mov.b32 %r1, %r2;
+    ld.param.u32 %r3, [_Z6param_0];
+}

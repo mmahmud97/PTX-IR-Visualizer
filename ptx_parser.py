@@ -1,9 +1,3 @@
-# ptx_parser.py
-# -------------------------------------------------------------------------------------
-# Professional-level parser for NVIDIA PTX IR.
-# This module extracts function/kernel boundaries, instructions, registers, etc.
-# -------------------------------------------------------------------------------------
-
 import re
 from typing import Dict, Any
 
@@ -23,13 +17,15 @@ class PtxParser:
         Returns:
             dict: A dictionary of kernels, each with instructions and resources info.
         """
-        # Regex to match kernel definitions (e.g., .visible .entry myKernel)
-        kernel_pattern = re.compile(r"\.visible\s+\.entry\s+([\w_]+)\s*\(.*?\)\s*\{")
-        instruction_pattern = re.compile(r"^\s*([a-zA-Z0-9_.]+)\s+([^\s;]+);", re.MULTILINE)
+        # Regex to match kernel definitions
+        kernel_pattern = re.compile(r"\.visible\s+\.entry\s+([\w_]+)\s*\(")
+
+        # Regex to match PTX instructions (basic format)
+        instruction_pattern = re.compile(r"^\s*([a-zA-Z0-9_.]+)\s+(.+?);", re.MULTILINE)
 
         current_kernel = None
 
-        # Split the PTX text by lines and iterate
+        # Split the PTX text by lines and iterate through them
         for line in ptx_text.splitlines():
             kernel_match = kernel_pattern.match(line)
             if kernel_match:
@@ -44,7 +40,7 @@ class PtxParser:
                 if instruction_match:
                     instruction = {
                         "opcode": instruction_match.group(1),
-                        "operands": instruction_match.group(2),
+                        "operands": instruction_match.group(2).strip(),
                     }
                     self.kernels[current_kernel]["instructions"].append(instruction)
 
