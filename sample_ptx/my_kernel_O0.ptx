@@ -1,1 +1,4 @@
+.visible .entry myKernelO0() {
+    mov.b32 %r1, %r2;
+}
 
