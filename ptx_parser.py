@@ -1,3 +1,9 @@
+# ptx_parser.py
+# -------------------------------------------------------------------------------------
+# Professional-level parser for NVIDIA PTX IR.
+# This module extracts function/kernel boundaries, instructions, registers, etc.
+# -------------------------------------------------------------------------------------
+
 import re
 from typing import Dict, Any
 
@@ -8,40 +14,31 @@ class PtxParser:
     (registers, shared memory, etc.).
     """
 
-    def __init__(self):
-        self.kernels = {}
-
     def parse_ptx(self, ptx_text: str) -> Dict[str, Any]:
         """
-        Parses the raw PTX text and populates self.kernels with structured data.
+        Parses the raw PTX text and populates the kernel structure with instructions.
         Returns:
             dict: A dictionary of kernels, each with instructions and resources info.
         """
+        # Dictionary to store parsed kernels
+        kernels = {}
+
         # Regex to match kernel definitions
-        kernel_pattern = re.compile(r"\.visible\s+\.entry\s+([\w_]+)\s*\(")
+        kernel_pattern = re.compile(r"\.visible\s+\.entry\s+([\w_]+)\s*\((.*?)\)")
+        instruction_pattern = re.compile(r"^\s*([a-zA-Z0-9_.]+)\s+(.*?);", re.MULTILINE)
 
-        # Regex to match PTX instructions (basic format)
-        instruction_pattern = re.compile(r"^\s*([a-zA-Z0-9_.]+)\s+(.+?);", re.MULTILINE)
+        # Find all kernel definitions
+        for match in kernel_pattern.finditer(ptx_text):
+            kernel_name = match.group(1)
+            kernels[kernel_name] = {"instructions": []}
 
-        current_kernel = None
+            # Extract instructions
+            instructions = instruction_pattern.findall(ptx_text)
+            for ins in instructions:
+                opcode, operands = ins
+                kernels[kernel_name]["instructions"].append({
+                    "opcode": opcode,
+                    "operands": operands.strip()
+                })
 
-        # Split the PTX text by lines and iterate through them
-        for line in ptx_text.splitlines():
-            kernel_match = kernel_pattern.match(line)
-            if kernel_match:
-                # Start of a new kernel
-                current_kernel = kernel_match.group(1)
-                self.kernels[current_kernel] = {"instructions": []}
-                continue
-
-            if current_kernel:
-                # Match instructions inside the current kernel
-                instruction_match = instruction_pattern.match(line)
-                if instruction_match:
-                    instruction = {
-                        "opcode": instruction_match.group(1),
-                        "operands": instruction_match.group(2).strip(),
-                    }
-                    self.kernels[current_kernel]["instructions"].append(instruction)
-
-        return self.kernels
+        return kernels

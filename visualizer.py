@@ -45,17 +45,24 @@ class Visualizer:
 
     def text_report(self, diff_report: Dict[str, Any]) -> str:
         """
-        Generates a textual summary from the diff report. 
+        Generates a textual summary from the diff report with color-coded highlights.
         """
         lines = []
         if diff_report["new_kernels"]:
-            lines.append("New Kernels Found: " + ", ".join(diff_report["new_kernels"]))
+            lines.append("<span class='added'>New Kernels Found: " + ", ".join(diff_report["new_kernels"]) + "</span>")
         if diff_report["removed_kernels"]:
-            lines.append("Removed Kernels: " + ", ".join(diff_report["removed_kernels"]))
+            lines.append("<span class='removed'>Removed Kernels: " + ", ".join(diff_report["removed_kernels"]) + "</span>")
 
         for kernel, changes in diff_report["changed_kernels"].items():
-            lines.append(f"Changes in {kernel}:")
-            lines.append(changes["instruction_diff"])
-            lines.append("")
+            lines.append(f"<h3>Changes in {kernel}:</h3>")
+            diff_lines = changes["instruction_diff"].split("\n")
+            for line in diff_lines:
+                if line.startswith("+"):
+                    lines.append(f"<span class='added'>{line}</span>")
+                elif line.startswith("-"):
+                    lines.append(f"<span class='removed'>{line}</span>")
+                else:
+                    lines.append(f"<span class='line-number'>{line}</span>")
 
         return "\n".join(lines)
+
