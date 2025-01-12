@@ -15,7 +15,7 @@ class TransformAnalyzer:
     """
 
     def compare_kernels(self, ptx_a: Dict[str, Any], ptx_b: Dict[str, Any]) -> Dict[str, Any]:
-        """git 
+        """
         Compares kernel data from two PTX sets.
         Returns:
             dict: A report highlighting changes in instruction count, new/removed kernels, etc.
@@ -39,14 +39,16 @@ class TransformAnalyzer:
             instructions_a = ptx_a[kernel_name]["instructions"]
             instructions_b = ptx_b[kernel_name]["instructions"]
 
-            if instructions_a != instructions_b:
+            if len(instructions_a) != len(instructions_b) or any(
+                ins_a != ins_b for ins_a, ins_b in zip(instructions_a, instructions_b)
+            ):
                 diff = self.generate_instruction_diff(instructions_a, instructions_b)
-                if diff:
-                    report["changed_kernels"][kernel_name] = {
-                        "instruction_diff": diff
-                    }
+                report["changed_kernels"][kernel_name] = {
+                    "instruction_diff": diff
+                }
 
         return report
+
 
 
     def generate_instruction_diff(self, instructions_a, instructions_b):
