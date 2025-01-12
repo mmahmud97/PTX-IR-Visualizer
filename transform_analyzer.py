@@ -56,4 +56,3 @@ class TransformAnalyzer:
 
         diff = difflib.unified_diff(lines_a, lines_b, lineterm="", fromfile="PTX_A", tofile="PTX_B")
         return "\n".join(diff)
-
