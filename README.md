@@ -9,7 +9,7 @@ This tool enables **CUDA developers** and **compiler engineers** to see **how th
 
 ## ✨ Features
 - 🖥️ **Command-Line Interface (CLI) Tool**
-- 🌐 **Web-Based GUI with Matrix Theme**
+- 🌐 **Web-Based GUI**
 - 🔍 **Textual Diff of PTX Code Changes**
 - 📈 **Graph Rendering of Instruction Flows (Basic)**
 - 🟢 **Color-Coded Differences (Green for Added, Red for Removed)**
