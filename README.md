@@ -1,7 +1,7 @@
 # 💻 PTX IR Visualizer
 
 ## 🚀 Overview
-**PTX IR Visualizer** is a tool that helps **GPU developers** compare different versions of **PTX (Parallel Thread Execution)** code. It highlights the **changes, optimizations, or regressions** between two PTX files, providing both a **Command-Line Interface (CLI)** and a **Matrix-style Web GUI**.
+**PTX IR Visualizer** is a tool that helps **GPU developers** compare different versions of **PTX (Parallel Thread Execution)** code. It highlights the **changes, optimizations, or regressions** between two PTX files, providing both a **Command-Line Interface (CLI)** and a **Web GUI**.
 
 This tool enables **CUDA developers** and **compiler engineers** to see **how their high-level code transforms into GPU assembly**, making it easier to catch **performance regressions** or **track optimizations**.
 
