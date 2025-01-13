@@ -24,7 +24,7 @@ This tool enables **CUDA developers** and **compiler engineers** to see **how th
    - Resource usage differences.
 3. **View the results in:**
    - **Command Line** for quick comparisons.
-   - **Web GUI** with a **Matrix-style aesthetic**.
+   - **Web GUI**.
 
 ---
 
